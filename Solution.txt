@@ -11,3 +11,17 @@ left join Address a on p.personId = a.personID
 Explanation : 1. instead of using * i have specify the row name which require for output like firstname, lastname, city, state,
 2. since both the table are different i need to join both table using join but here we only want the address of who is present in person table so we use left join to connect the table and both table have personid column. 
 3. what left join do it will return the data from left side and matching data from right side.
+
+---------------------------------------------------------------------------------------
+
+solution 2 : 
+    select e.name as Employee from Employee e
+    join Employee f on
+    e.managerId = f.id
+    where e.salary > f.salary
+
+Approach: using inner self join
+
+  1. as we have only one table so we need to using self join on same table so it create a new same tbale with different alias[i have use p (use can't use same alias)]
+2. then we have use inner join on e.managerid and f.id  to get data why inner join it will only get matching manager id only other are ignore .
+3. last filter the data to check who is earning more than employee salary 
