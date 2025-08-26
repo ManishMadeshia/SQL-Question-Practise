@@ -1,1 +1,13 @@
+----------------------------------------------solution-------------------------------------------------------------------
 
+solution 1 : 
+  Select p.firstName,
+    p.lastName,
+    a.city,
+    a.state
+from Person p
+left join Address a on p.personId = a.personID
+
+Explanation : 1. instead of using * i have specify the row name which require for output like firstname, lastname, city, state,
+2. since both the table are different i need to join both table using join but here we only want the address of who is present in person table so we use left join to connect the table and both table have personid column. 
+3. what left join do it will return the data from left side and matching data from right side.
