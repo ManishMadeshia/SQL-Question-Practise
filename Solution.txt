@@ -37,3 +37,17 @@ group by player_id
 approach : 
 
 1) to find out the first login  i have use min function on date table with fetch as we know aggreation function need to used by group by so we used group by then what happen it will group all id together eg > player 1, player 1, login date : 20 dec and 30 dec it give player 1, login date > (20,30 dec) using min we will get 20 dec 
+
+------------------------------------------------------------------------------------------------------------
+
+solution 4 : 
+
+Select E.name, B.bonus from Employee E
+left join Bonus B
+on E.empId = B.empId
+where B.bonus < 1000 or B.bonus is null
+
+Approach : 
+
+1) it clearly said each employee with bonus < 1000 so we need to keeep empployeee to solve this we have use left join table on employee
+2) we have join on empid which is common in both tablle using that we can join the table
