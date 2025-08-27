@@ -25,3 +25,15 @@ Approach: using inner self join
   1. as we have only one table so we need to using self join on same table so it create a new same tbale with different alias[i have use p (use can't use same alias)]
 2. then we have use inner join on e.managerid and f.id  to get data why inner join it will only get matching manager id only other are ignore .
 3. last filter the data to check who is earning more than employee salary 
+
+---------------------------------------------------------------------------------------------------
+
+solution 3 :
+
+select player_id, min(date) as first login
+from Activity
+group by player_id
+
+approach : 
+
+1) to find out the first login  i have use min function on date table with fetch as we know aggreation function need to used by group by so we used group by then what happen it will group all id together eg > player 1, player 1, login date : 20 dec and 30 dec it give player 1, login date > (20,30 dec) using min we will get 20 dec 
