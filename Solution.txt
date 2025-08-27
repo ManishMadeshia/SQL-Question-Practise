@@ -51,3 +51,10 @@ Approach :
 
 1) it clearly said each employee with bonus < 1000 so we need to keeep empployeee to solve this we have use left join table on employee
 2) we have join on empid which is common in both tablle using that we can join the table
+
+---------------------------------------------------------------------------------------------
+
+solution 5 : 
+
+select name from Customer
+where referee_id != 2 or referee_id is null
