@@ -1,0 +1,65 @@
+Q1. Query all columns for all American cities in theCITY table with populations larger than 100000.The CountryCode for America is USA.
+>> select * from City 
+  where Population > 100000
+
+
+Q2. Query the NAME field for all American cities inthe CITY table with populations larger than 120000.The CountryCode for America is USA.
+>>  select name from City 
+  where Population > 120000
+
+Q3.Query all columns (attributes) for every row in the CITY table.
+>> Select * from City 
+
+Q4. Query all columns for a city in CITY with theID 1661.
+>> Select * from City where ID = 1661
+
+Q5. Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan isJPN.
+>> Select * from City WHERE CountryCode = 'JPN'
+
+Q6.Query the names of all the Japanese cities inthe CITY table. The COUNTRYCODE for Japan isJPN.
+>> Select Name from City WHERE CountryCode = 'JPN'
+
+Q7.Query a list of CITY and STATE from the STATIONtable.
+>> Select city, State from Station
+
+Q8. Query a list of CITY names from STATION for citiesthat have an even ID number. Print the results
+in any order, but exclude duplicates from the answer.
+>> Select Distinct City from Station
+where id%2==0
+
+Q9. Find the difference between the total number of CITY entries in the table and the number ofdistinct CITY entries in the table
+>> Select Count(city) - count(distinct city) as difference from Station
+
+Q10.Query the two cities in STATION with the shortestand longest CITY names, as well as theirrespective lengths (i.e.: number of characters in the name). If there is more than one smallestor largest city, choose the one that comes first when ordered alphabetically.
+>> 
+
+11 . Query the list of CITY names starting with vowels(i.e., a, e, i, o, or u) from STATION. Your resultcannot contain duplicates.
+>> Select distinct city from station
+where city like 'a%'
+or city like 'e%'
+or city like 'i%'
+or city like 'o%'
+or city like 'u%'
+order by city asc
+
+12 . Query the list of CITY names ending with vowels(a, e, i, o, u) from STATION. Your result cannotcontain duplicates.
+>> Select distinct city from station
+where city like '%a'
+or city like '%e'
+or city like '%i'
+or city like '%o'
+or city like '%u'
+order by city asc
+
+13. Query the list of CITY names from STATION thatdo not start with vowels. Your result cannotcontain duplicates.
+>> Select Distinct city from station
+where city not REGEXP '^[aeiouAEIOU]'
+
+
+ Q15.Query the list of CITY names from STATION thateither do not start with vowels or do not endwith vowels. Your result cannot contain duplicates.
+>> select distinct city from Station
+where city not( (city LIKE 'A%' OR city LIKE 'E%' OR city LIKE 'I%' OR city LIKE 'O%' OR city LIKE 'U%')
+and 
+(city LIKE '%a' OR city LIKE '%e' OR city LIKE '%i' OR city LIKE '%o' OR city LIKE '%u') )
+order by city
+
