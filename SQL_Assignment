@@ -87,3 +87,25 @@ places.
 when Delivery order_date = customer_pref_delivery_date  Then 'immediately'
 else 'Schedule'
 end as delivery
+
+Q.19 Write an SQL query to find the ctr of each Ad. Round ctr to two decimal points.
+Return the result table ordered by ctr in descending order and by ad_id in ascending order in case of a
+tie.
+
+>> select ad_id,
+	IFNULL(
+			Round(
+				Avg(
+					Case
+						When action = 'Clicked' Then 1
+						When action = 'Viewed' Then 0
+						Else Null
+					End
+						) * 100,
+                        2), 
+                        0) As Ctr
+from Ads
+GROUP BY ad_id
+ORDER BY ctr DESC, ad_id ASC;
+
+
