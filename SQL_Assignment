@@ -176,5 +176,112 @@ group by p.product_id
 having  sum(o.unit)  >=100
 
 
-Q. 27 
+Q. 29 Write an SQL query to report the distinct titles of the kid-friendly movies streamed in June 2020.
+Return the result table in any order.
+>> 
+create table TVprogram(
+	program_date date,
+    content_id int,
+    channel varchar(50),
+    constraint pk primary key (program_date, content_id)
+)
 
+create table content(
+	content_id varchar(50),
+    title varchar(25),
+    Kids_content enum('Y','N'),
+    content_type varchar(50),
+    constraint pk primary key(content_id)
+)
+
+insert into Content VALUES (1,'Leetcode Movie','N','Movies'),(2,'Alg. for Kids','Y','Series'),(3,'DatabaseSols','N','Series'),(4,'Aladdin','Y','Movies'),(5,'Cinderella','Y','Movies');
+insert into TVprogram VALUES ('2020-06-10 08:00',1,'LC-Channel'),('2020-05-11 12:00',2,'LC-Channel'),('2020-05-12 12:00',3,'LC-Channel'),('2020-05-13 14:00',4,'Disney Ch'),('2020-06-18 14:00',4,'Disney Ch'),('2020-07-15 16:00',5,'Disney Ch');
+
+select * from TVProgram;
+select * from Content;
+
+with cte1 as(
+select 
+	c.content_id,
+    c.title,
+    c.kids_content,
+    t.program_date
+from Content c left join TVProgram t on c.content_id = t.content_id
+where c.kids_content = "Y" and t.program_date between '2020-06-01' and '2020-06-30')
+
+select distinct title from cte1
+
+Q 30. Write an SQL query to find the npv of each query of the Queries table.
+Return the result table in any order.
+>> select * from NPV;
+select * from Queries;
+
+select 
+	Q.id,
+    Q.year,
+    N.npv
+from Queries Q left join NPV N on Q.id = N.id
+
+Q31. Write an SQL query to show the unique ID of each user, If a user does not have a unique ID replace just
+show null
+
+>> create table employees(
+	id int,
+    name varchar(50),
+    constraint pk primary key (id)
+)
+
+select * from employees
+
+insert into Employees VALUES
+(1,'Alice'),(7,'Bob'),(11,'Meir'),(90,'Winston'),(3,'Jonathan');
+
+create table if not exists EmployeeUNI
+(
+id int,
+unique_id int,
+constraint pk PRIMARY KEY (id, unique_id)
+);
+insert into EmployeeUNI VALUES (3,1),(11,2),(90,3);
+select * from EmployeeUNI;
+
+select * from employees e left join EmployeeUNI Ei on e.id = Ei.id
+
+
+Q32. Write an SQL query to report the distance travelled by each user.
+Return the result table ordered by travelled_distance in descending order, if two or more users
+travelled the same distance, order them by their name in ascending order
+
+>> show tables
+create table if not exists Users
+(
+id int,
+name VARCHAR(50),
+constraint pk PRIMARY KEY (id)
+);
+
+insert into Users VALUES
+(1,'Alice'),(2,'Bob'),(3,'Alex'),(4,'Donald'),(7,'Lee'),(13,'Jonathan'),(19,'Elvis');
+
+
+create table if not exists Rides
+(
+id int,
+user_id int,
+distance int,
+constraint pk PRIMARY KEY (id),
+constraint fk FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+
+insert into Rides VALUES
+(1,1,120),(2,2,317),(3,3,222),(4,7,100),(5,13,312),(6,19,50),(7,7,120),
+(8,19,400),(9,7,230);
+
+select * from Rides;
+Select * from Users;
+
+select U.name, sum(distance) as Travelled_distance  from Rides R Right join Users U on R.user_id = U.id group by name order by Travelled_distance desc, name asc
+
+
+
+  
