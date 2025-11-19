@@ -382,3 +382,43 @@ select
 from Prices P left join UnitsSold S on P.product_id = S.product_id
 and S.purchase_date between P.start_date and P.end_date
 group by P.product_id
+
+Q41. Write an SQL query to report the number of cubic feet of volume the inventory occupies in each
+warehouse.
+Return the result table in any order
+>>>>> 
+use demo
+create table if not exists Warehouse
+(
+name VARCHAR(50),
+product_id int,
+units int,
+constraint pk PRIMARY KEY (name, product_id)
+);
+
+insert into Warehouse VALUES ('LCHouse1',1,1),('LCHouse1',2,10),('LCHouse1',3,5),('LCHouse2',1,2),('LCHouse2',2,2),('LCHouse3',4,1);
+
+
+create table if not exists Products
+(
+product_id int,
+product_name VARCHAR(50),
+Width int,
+Length int,
+Height int,
+constraint pk PRIMARY KEY (product_id)
+);
+
+insert into Products VALUES(1,'LC-TV',5,50,40),(2,'LC-KeyChain',5,5,5),(3,'LC-Phone',2,10,10),(4,'LC-T-Shirt',4,10,20);
+
+select * from Products;
+select * from warehouse;
+
+
+select w.name as warehouse_name, sum(w.units * P.volume) from warehouse w join 
+(select 
+	product_id,
+    (Width*Length*Height) as volume
+from Products) p
+on w.product_id= p.product_id
+group by w.name
